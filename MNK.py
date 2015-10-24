@@ -7,34 +7,41 @@ else:
     stroka=xinput.readline()
     stroka=stroka.rstrip()
     stroka=stroka.split()
-    i=float(stroka[0])
-    u=float(stroka[1])
-    proizvedenieui=0
-    ikvadrat=0
-    ukvadrat=0
-    while (i!=0) and (u!=0):
-        ikvadrat=ikvadrat + i**2
-        ukvadrat=ukvadrat + u**2
-        proizvedenieui=proizvedenieui + u*i
+    x=float(stroka[0])
+    y=float(stroka[1])
+    proizvedeniexy=0
+    ykvadrat=0
+    xkvadrat=0
+    summax=0
+    summay=0
+    n=1
+    while (y!=0) and (x!=0):
+        xkvadrat=xkvadrat + x**2
+        ykvadrat=ykvadrat + y**2
+        summax+=x
+        summay+=y
+        proizvedeniexy=proizvedeniexy + x*y
         stroka=xinput.readline()
         if len(stroka)>1:
             stroka=stroka.rstrip()   
-            stroka=stroka.split()
-            print(stroka) 
-            i=float(stroka[0])
-            u=float(stroka[1])
-            print(stroka[0])
+            stroka=stroka.split() 
+            x=float(stroka[0])
+            y=float(stroka[1])
+            n+=1
         else:
             break
+    n=n+1
+    print(n)
     xinput.close()    
-    print('Средний квадрат числителя=',ikvadrat)
-    print('Среднее произведение числителя и знаменателя=',proizvedenieui)
-    print('Средний квадрат знаменателя=',ukvadrat)
-    g=proizvedenieui/ikvadrat
-    print('Отношение произведения и квадрата знаменателя=', proizvedenieui/ikvadrat)
-    print('Занесите под корень ошибочки=',(ukvadrat/ikvadrat)- g**2)
+    b=(proizvedeniexy/n-summax*summay/n/n)/(xkvadrat/n-summax**2/(n*n))
+    a=summay/n - b*summax/n
+    deltab=(1/n**0.5)*(((ykvadrat/n - (summay/n)**2)/(xkvadrat/n - (summax/n)**2))-b**2)**0.5
+    deltaa=deltab*(xkvadrat/n-(summax/n)**2)**0.5
+    print("Уравнение прямой имеет вид y=",a,"+",b,"x")
+    print("Погрешность измерения а=",deltaa)
+    print("ПОгрешность измерения b=",deltab)
     x=np.arange(0,10.01,0.01)
-    plt.plot(x,(proizvedenieui/ikvadrat)*x)
+    plt.plot(x,a+b*x)
     plt.show()
         
     
