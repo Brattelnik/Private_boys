@@ -17,11 +17,13 @@ else:
         ukvadrat=ukvadrat + u**2
         proizvedenieui=proizvedenieui + u*i
         stroka=xinput.readline()
-        if stroka!='':
-            stroka=stroka.rstrip()
+        if len(stroka)>1:
+            stroka=stroka.rstrip()   
             stroka=stroka.split()
+            print(stroka) 
             i=float(stroka[0])
             u=float(stroka[1])
+            print(stroka[0])
         else:
             break
     xinput.close()    
@@ -31,9 +33,8 @@ else:
     g=proizvedenieui/ikvadrat
     print('Отношение произведения и квадрата знаменателя=', proizvedenieui/ikvadrat)
     print('Занесите под корень ошибочки=',(ukvadrat/ikvadrat)- g**2)
-    x=np.arange(-10,10.01,0.01)
+    x=np.arange(0,10.01,0.01)
     plt.plot(x,(proizvedenieui/ikvadrat)*x)
     plt.show()
-input()
         
     
