@@ -1,10 +1,10 @@
 xinput=open('input.txt','r')
-if xinput.readline()=='':
+stroka=xinput.readline()
+if stroka=='':
     print("Введите в файле input.txt значения по х и по у через пробел, два значения на строку, cохраните файл. После включите программу")
 else:
     import numpy as np
     import matplotlib.pyplot as plt
-    stroka=xinput.readline()
     stroka=stroka.rstrip()
     stroka=stroka.split()
     x=float(stroka[0])
@@ -17,6 +17,8 @@ else:
     n=1
     ZnachX=[]
     ZnachY=[]
+    ZnachX.append(x)
+    ZnachY.append(y)
     MaxX=x
     MindeltaX=x
     while (y!=0) and (x!=0):
@@ -53,8 +55,17 @@ else:
     x=np.arange(0,1.1*MaxX,0.1*MindeltaX)
     plt.plot(x,a+b*x)
     plt.grid(True)
+    a=a*10000//10/1000
+    b=b*10000//10/1000
+    deltaa=deltaa*10000//10/1000
+    deltab=deltab*10000//10/1000
     plt.plot(ZnachX,ZnachY,'ro')
-    plt.title(r'$f(x)=$')
+    plt.plot(x,0*x)
+    #plt.title('Ошибка коэф.при х={};Ошибка свободного члена'.format(deltab,deltaa))
+    if a>0:
+        plt.title('y={}x+{}\n$\sigma_b$={}; $\sigma_a$={}'.format(b,a,deltab,deltaa))
+    else:
+        plt.title('y={}x{}\n$\sigma_b$={}; $\sigma_a$={}'.format(b,a,deltab,deltaa))
     plt.legend(('График функции','Экспериментальные точки'),loc='best')
     plt.show()
         
